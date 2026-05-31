@@ -657,6 +657,10 @@ namespace Flow.Launcher.ViewModel
             PinnedResults.SelectedItem = PinnedResults.Results[PinnedResults.SelectedIndex];
             Results.SelectedIndex = -1;
             Results.SelectedItem = null;
+            History.SelectedIndex = -1;
+            History.SelectedItem = null;
+            ContextMenu.SelectedIndex = -1;
+            ContextMenu.SelectedItem = null;
             PreviewSelectedItem = PinnedResults.SelectedItem;
         }
 
