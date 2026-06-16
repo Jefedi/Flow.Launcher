@@ -104,7 +104,7 @@ public class Main : ISettingProvider, IPlugin, IReloadable, IPluginI18n, IContex
                         Score = BookmarkLoader.MatchProgram(c, param).Score,
                         Action = _ =>
                         {
-                            Context.API.OpenUrl(c.Url);
+                            SearchWeb.OpenInBrowserTab(c.Url);
 
                             return true;
                         },
@@ -128,7 +128,7 @@ public class Main : ISettingProvider, IPlugin, IReloadable, IPluginI18n, IContex
                         Score = 5,
                         Action = _ =>
                         {
-                            Context.API.OpenUrl(c.Url);
+                            SearchWeb.OpenInBrowserTab(c.Url);
                             return true;
                         },
                         ContextData = new BookmarkAttributes { Url = c.Url }
