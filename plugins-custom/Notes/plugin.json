@@ -1,0 +1,12 @@
+{
+  "ID": "FF1A9ED6DC8F4B34907CF185545B838A",
+  "ActionKeyword": "note",
+  "Name": "Notes",
+  "Description": "Capture rapide d'une pensée façon Raycast : note, recherche, épingle, copie.",
+  "Author": "jefe",
+  "Version": "0.1.0",
+  "Language": "python",
+  "Website": "https://github.com/jefedi/flow.launcher",
+  "ExecuteFileName": "main.py",
+  "IcoPath": "Images\\icon.png"
+}

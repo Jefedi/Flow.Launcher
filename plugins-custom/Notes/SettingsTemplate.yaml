@@ -1,0 +1,8 @@
+body:
+  - type: textBlock
+    attributes:
+      description: |
+        Notes — capture rapide façon Raycast.
+        « note <texte> » enregistre une note · « note » liste/recherche tes notes.
+        Entrée copie une note · Maj+Entrée pour épingler / supprimer.
+        Les notes sont stockées dans %APPDATA%\FlowLauncher\Notes\notes.json
