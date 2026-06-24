@@ -8,6 +8,8 @@ The ``flowlauncher`` library reads that request, dispatches to ``query`` /
 
 import os
 import sys
+import webbrowser
+from urllib.parse import quote
 
 # Make bundled dependencies (installed via: pip install -r requirements.txt -t ./lib)
 # importable, regardless of the directory Flow Launcher runs us from.
@@ -18,7 +20,7 @@ for _path in (_PLUGIN_DIR, os.path.join(_PLUGIN_DIR, "lib")):
 
 from flowlauncher import FlowLauncher
 
-from libretranslate import TranslationError, translate
+from libretranslate import TranslationError, language_name, translate
 
 ICON = "Images/icon.png"
 
@@ -56,11 +58,12 @@ class LibreTranslate(FlowLauncher):
             ]
 
         settings = self._settings()
+        target = settings["target_lang"]
         try:
-            translated, detected = translate(
+            result = translate(
                 text,
                 instance_url=settings["instance_url"],
-                target_lang=settings["target_lang"],
+                target_lang=target,
                 api_key=settings["api_key"],
             )
         except TranslationError as exc:
@@ -72,38 +75,83 @@ class LibreTranslate(FlowLauncher):
                 }
             ]
 
-        target = settings["target_lang"]
-        subtitle = f"{detected or '?'} → {target}  ·  Entrée : copier la traduction"
+        # Richer subtitle: full language names + detection confidence when available.
+        detected_label = language_name(result.detected)
+        if result.confidence is not None:
+            detected_label += f" ({result.confidence}%)"
+        subtitle = (
+            f"{detected_label} → {language_name(target)}"
+            "  ·  Entrée : copier  ·  Maj+Entrée : plus d'actions"
+        )
         return [
             {
-                "Title": translated,
+                "Title": result.text,
                 "SubTitle": subtitle,
                 "IcoPath": ICON,
                 # method names starting with "Flow.Launcher." are handled by the
                 # Flow core directly (IPublicAPI), not forwarded back to Python.
                 "JsonRPCAction": {
                     "method": "Flow.Launcher.CopyToClipboard",
-                    "parameters": [translated, False, True],
+                    "parameters": [result.text, False, True],
                 },
-                # Carried into context_menu for the secondary action.
-                "ContextData": [text, translated],
+                # Carried into context_menu: [original, translation, detected, target].
+                "ContextData": [text, result.text, result.detected, target],
             }
         ]
 
     def context_menu(self, data):
-        # ``data`` is whatever we put in ContextData above.
-        original = data[0] if data else ""
-        return [
-            {
-                "Title": "Copier le texte original",
-                "SubTitle": original,
+        # ``data`` is ContextData: [original, translation, detected, target].
+        original = data[0] if len(data) > 0 else ""
+        translation = data[1] if len(data) > 1 else ""
+        detected = data[2] if len(data) > 2 else "auto"
+        target = data[3] if len(data) > 3 else "en"
+
+        def copy_entry(title, value):
+            return {
+                "Title": title,
+                "SubTitle": value,
                 "IcoPath": ICON,
                 "JsonRPCAction": {
                     "method": "Flow.Launcher.CopyToClipboard",
-                    "parameters": [original, False, True],
+                    "parameters": [value, False, True],
                 },
             }
+
+        entries = [
+            copy_entry("Copier la traduction", translation),
+            copy_entry("Copier le texte original", original),
+            copy_entry("Copier « original → traduction »", f"{original} → {translation}"),
+            {
+                "Title": "Ouvrir dans Google Translate",
+                "SubTitle": "Ouvre le texte dans le navigateur (quitte ton instance)",
+                "IcoPath": ICON,
+                # Non "Flow.Launcher." method -> forwarded back to open_url below.
+                "JsonRPCAction": {
+                    "method": "open_url",
+                    "parameters": [self._google_url(original, detected, target)],
+                },
+            },
         ]
+        return entries
+
+    # A few LibreTranslate codes differ from Google Translate's; map those.
+    _GOOGLE_CODES = {
+        "zh-Hans": "zh-CN", "zh-Hant": "zh-TW", "pt-BR": "pt", "nb": "no",
+    }
+
+    @classmethod
+    def _google_url(cls, text, source, target):
+        """Build a prefilled Google Translate URL ('auto' source is safest)."""
+        sl = cls._GOOGLE_CODES.get(source, source) if source else "auto"
+        tl = cls._GOOGLE_CODES.get(target, target) if target else "en"
+        return (
+            "https://translate.google.com/"
+            f"?sl={quote(sl)}&tl={quote(tl)}&text={quote(text)}&op=translate"
+        )
+
+    def open_url(self, url):
+        """Action handler: open a URL in the default browser."""
+        webbrowser.open(url)
 
 
 if __name__ == "__main__":

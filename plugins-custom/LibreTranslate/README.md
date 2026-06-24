@@ -5,9 +5,13 @@ depuis la barre de Flow Launcher.
 
 - ActionKeyword : `tr` (modifiable dans les réglages du plugin)
 - `tr <texte>` → traduit `<texte>` vers la langue cible
-- **Title** = la traduction · **SubTitle** = langue détectée → langue cible
+- **Title** = la traduction · **SubTitle** = langue détectée (nom + confiance) → langue cible
 - **Entrée** = copie la traduction dans le presse-papier
-- **Menu contextuel** (Shift+Entrée) = copie le texte original
+- **Menu contextuel** (Maj+Entrée) — actions enrichies :
+  - Copier la traduction
+  - Copier le texte original
+  - Copier « original → traduction »
+  - Ouvrir dans Google Translate (prérempli ; quitte ton instance)
 
 > Ce plugin est isolé dans `plugins-custom/LibreTranslate/` pour ne **pas** toucher au
 > core C# de Flow Launcher et garder le fork mergeable avec l'upstream.
