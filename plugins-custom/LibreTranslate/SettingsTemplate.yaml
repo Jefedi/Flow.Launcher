@@ -16,15 +16,60 @@ body:
     attributes:
       name: target_lang
       label: Target language
-      description: Language code to translate into.
+      description: >
+        LibreTranslate language code to translate into (the value is the code sent
+        to the API). Full list as offered by the instance.
       defaultValue: fr
       options:
-        - fr
-        - en
-        - es
-        - de
-        - it
-        - pt
+        - ar        # Arabic
+        - az        # Azerbaijani
+        - bg        # Bulgarian
+        - bn        # Bengali
+        - ca        # Catalan
+        - cs        # Czech
+        - da        # Danish
+        - de        # German
+        - el        # Greek
+        - en        # English
+        - eo        # Esperanto
+        - es        # Spanish
+        - et        # Estonian
+        - eu        # Basque
+        - fa        # Persian
+        - fi        # Finnish
+        - fr        # French
+        - ga        # Irish
+        - gl        # Galician
+        - he        # Hebrew
+        - hi        # Hindi
+        - hu        # Hungarian
+        - id        # Indonesian
+        - it        # Italian
+        - ja        # Japanese
+        - ko        # Korean
+        - ky        # Kyrgyz
+        - lt        # Lithuanian
+        - lv        # Latvian
+        - ms        # Malay
+        - nb        # Norwegian
+        - nl        # Dutch
+        - pl        # Polish
+        - pt        # Portuguese
+        - pt-BR     # Portuguese (Brazil)
+        - ro        # Romanian
+        - ru        # Russian
+        - sk        # Slovak
+        - sl        # Slovenian
+        - sq        # Albanian
+        - sv        # Swedish
+        - th        # Thai
+        - tl        # Tagalog
+        - tr        # Turkish
+        - uk        # Ukrainian
+        - ur        # Urdu
+        - vi        # Vietnamese
+        - zh-Hans   # Chinese (Simplified)
+        - zh-Hant   # Chinese (Traditional)
 
   - type: passwordBox
     attributes:
