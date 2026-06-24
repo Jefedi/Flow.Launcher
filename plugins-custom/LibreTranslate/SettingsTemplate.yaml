@@ -10,7 +10,7 @@ body:
       name: instance_url
       label: Instance URL
       description: Base URL of your LibreTranslate instance (no trailing slash needed).
-      defaultValue: https://translate.jefe.al
+      defaultValue: https://translate.jefe.ovh
 
   - type: dropdown
     attributes:

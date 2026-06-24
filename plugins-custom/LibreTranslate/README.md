@@ -20,7 +20,7 @@ depuis la barre de Flow Launcher.
 2. **Python configuré dans Flow Launcher** :
    `Settings → General → Python` doit pointer vers un `python.exe` (Python 3.x).
    Sans ça, Flow ne peut pas lancer les plugins Python.
-3. Une **instance LibreTranslate** accessible (par défaut `https://translate.jefe.al`).
+3. Une **instance LibreTranslate** accessible (par défaut `https://translate.jefe.ovh`).
 
 ---
 
@@ -84,7 +84,7 @@ Reload Plugin Data
 
 `Settings → Plugins → LibreTranslate` :
 
-- **Instance URL** — défaut `https://translate.jefe.al` (le `/` final est ignoré)
+- **Instance URL** — défaut `https://translate.jefe.ovh` (le `/` final est ignoré)
 - **Target language** — `fr`, `en`, `es`, `de`, `it`, `pt` (défaut `fr`)
 - **API key** — laisse vide si ton instance n'en demande pas
 

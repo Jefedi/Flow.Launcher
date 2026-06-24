@@ -25,7 +25,7 @@ ICON = "Images/icon.png"
 # Default settings, used as a fallback if Flow has not pushed settings yet
 # (e.g. a brand-new install before the settings panel is opened).
 DEFAULTS = {
-    "instance_url": "https://translate.jefe.al",
+    "instance_url": "https://translate.jefe.ovh",
     "target_lang": "fr",
     "api_key": "",
 }
