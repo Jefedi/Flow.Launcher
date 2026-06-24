@@ -9,7 +9,7 @@ body:
     attributes:
       name: angle_unit
       label: Unité d'angle
-      description: Unité utilisée par les fonctions trigonométriques (sin, cos, tan…).
+      description: "Unité utilisée par les fonctions trigonométriques (sin, cos, tan…)."
       defaultValue: radians
       options:
         - radians
@@ -19,12 +19,12 @@ body:
     attributes:
       name: thousands_separator
       label: Séparateur de milliers
-      description: Grouper les grands résultats (ex : 1,234,567).
+      description: "Grouper les grands résultats (ex : 1,234,567)."
       defaultValue: "false"
 
   - type: input
     attributes:
       name: default_currency
       label: Devise par défaut
-      description: Devise cible quand la conversion n'en précise pas (ex : « 100 usd »).
+      description: "Devise cible quand la conversion n'en précise pas (ex : « 100 usd »)."
       defaultValue: EUR
