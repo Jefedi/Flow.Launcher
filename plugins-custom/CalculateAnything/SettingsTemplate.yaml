@@ -21,3 +21,10 @@ body:
       label: Thousands separator
       description: Group large results with separators (e.g. 1,234,567).
       defaultValue: "false"
+
+  - type: input
+    attributes:
+      name: default_currency
+      label: Default currency
+      description: Target currency when a conversion omits one (e.g. "100 usd").
+      defaultValue: EUR

@@ -1,5 +1,8 @@
 # Flow Launcher Python JSON-RPC helper library.
 flowlauncher>=0.1.0
 
-# NOTE: the math engine uses only the Python standard library (ast, math).
-# No third-party math/eval dependency is required.
+# Time-zone database for zoneinfo (required on Windows, which has no system tz DB).
+tzdata>=2024.1
+
+# NOTE: math, currency and date engines use only the Python standard library
+# (ast, math, urllib, datetime, zoneinfo). No other third-party deps required.

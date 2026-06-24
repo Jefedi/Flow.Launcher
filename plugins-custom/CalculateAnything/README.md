@@ -1,18 +1,19 @@
 # Calculate Anything — plugin Flow Launcher
 
 Un calculateur façon **Raycast** : tape une expression en langage proche du naturel,
-obtiens le résultat, copie-le d'un Entrée. **v1 = maths & expressions** (les devises,
-unités, dates/fuseaux viendront ensuite).
+obtiens le résultat, copie-le d'un Entrée. Gère **maths, devises, crypto, dates et
+fuseaux horaires**.
 
 - ActionKeyword : `=` (modifiable dans les réglages)
-- `= <expression>` → calcule et affiche le résultat
+- `= <expression>` → détecte le type (devise → date → math) et affiche le résultat
 - **Entrée** = copie le résultat dans le presse-papier
-- **Menu contextuel** (Maj+Entrée) : copier le résultat, ou « expression = résultat »
+- **Menu contextuel** (Maj+Entrée) : actions de copie selon le type (montant, taux, libellé…)
 
 > Plugin isolé dans `plugins-custom/CalculateAnything/` — **aucune modif du core C#**.
 
 ## Ce qu'il comprend
 
+### Maths & expressions
 | Catégorie | Exemples |
 |---|---|
 | Arithmétique | `2+2`, `(2+3)*4`, `10/3`, `-5 + 3` |
@@ -21,18 +22,43 @@ unités, dates/fuseaux viendront ensuite).
 | Pourcentages | `15% of 80`, `80 + 15%`, `200 - 10%`, `50%` |
 | Fonctions | `sqrt(2)`, `abs(-5)`, `log(100)`, `ln(e)`, `log2(8)`, `min(1,2,3)`, `gcd(12,18)` |
 | Trigonométrie | `sin(90)`, `cos(0)` (unité d'angle configurable : radians/degrés) |
-| Constantes | `pi`, `e`, `tau` |
-| Factorielle / modulo | `5!`, `10 mod 3`, `10 % 3` |
-| Bases | `0xFF`, `0b1010` |
+| Constantes / autres | `pi`, `e`, `tau`, `5!`, `10 mod 3`, `0xFF`, `0b1010` |
+
+### Devises & crypto
+| Exemple | Effet |
+|---|---|
+| `10 usd in eur` | conversion fiat → fiat |
+| `0.5 btc in usd` | crypto → fiat |
+| `2 eth in btc` | crypto → crypto |
+| `$100 in eur` | symbole monétaire accepté (`$ € £ ¥ ₿`) |
+| `100 usd` | converti vers ta **devise par défaut** (réglage) |
+
+Taux en direct via **Frankfurter** (BCE, fiat) et **CoinGecko** (crypto) — APIs gratuites
+**sans clé**. Les taux sont mis en cache sur disque (fiat 1 h, crypto 5 min) pour rester
+rapides et ménager les APIs. ~30 devises fiat et ~30 cryptos majeures.
+
+### Dates & fuseaux horaires
+| Exemple | Effet |
+|---|---|
+| `now`, `today` | date et heure locales |
+| `now in tokyo`, `london time` | heure dans un fuseau (villes, IANA, `utc+2`) |
+| `in 3 weeks`, `3 days from now`, `2 months ago` | date relative |
+| `days until 2026-12-25`, `days since 2020-01-01` | nombre de jours |
+| `days between 2026-01-01 and 2026-12-31` | écart entre deux dates |
+| `2026-12-25 + 10 days` | arithmétique sur une date |
+
+Mots-clés en **français et anglais** (`dans 2 mois`, `il y a 1 an`, `demain`…).
 
 ## Réglages (Flow → Settings → Plugins → Calculate Anything)
 - **Angle unit** — `radians` (défaut) ou `degrees` pour `sin/cos/tan`
-- **Thousands separator** — grouper les grands résultats (`1,234,567`)
+- **Thousands separator** — grouper les grands résultats math (`1,234,567`)
+- **Default currency** — devise cible quand elle n'est pas précisée (défaut `EUR`)
 
-## Sécurité
-Le moteur **n'utilise pas `eval`**. Il analyse l'expression avec le module `ast` et
-n'autorise qu'une liste blanche d'opérateurs, fonctions et constantes. Les imports,
-appels arbitraires, accès attributs, exposants/factorielles démesurés sont refusés.
+## Sécurité & confidentialité
+- Le moteur math **n'utilise pas `eval`** : analyse `ast` + liste blanche stricte
+  (imports, appels arbitraires, accès attributs, exposants/factorielles démesurés refusés).
+- Les conversions de devises envoient **uniquement les codes et le montant** (jamais ton
+  texte) à Frankfurter/CoinGecko. Les dates/fuseaux sont calculés **hors-ligne**.
 
 ## Déploiement pour test (Windows)
 
