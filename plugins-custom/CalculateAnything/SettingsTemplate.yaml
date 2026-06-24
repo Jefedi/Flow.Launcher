@@ -1,0 +1,23 @@
+body:
+  - type: textBlock
+    attributes:
+      description: |
+        Calculate Anything — natural-language calculator.
+        Type the action keyword followed by an expression, e.g.  = 15% of 80
+
+  - type: dropdown
+    attributes:
+      name: angle_unit
+      label: Angle unit
+      description: Unit used by trig functions (sin, cos, tan, ...).
+      defaultValue: radians
+      options:
+        - radians
+        - degrees
+
+  - type: checkbox
+    attributes:
+      name: thousands_separator
+      label: Thousands separator
+      description: Group large results with separators (e.g. 1,234,567).
+      defaultValue: "false"

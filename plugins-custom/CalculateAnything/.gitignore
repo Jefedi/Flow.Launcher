@@ -1,0 +1,5 @@
+# Local install artifacts — must NOT be committed.
+# 'lib/' is created by: pip install -r requirements.txt -t ./lib
+lib/
+__pycache__/
+*.pyc

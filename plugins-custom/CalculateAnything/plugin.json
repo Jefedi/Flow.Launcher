@@ -1,0 +1,12 @@
+{
+  "ID": "F513A19270374E4A98F2618608E80770",
+  "ActionKeyword": "=",
+  "Name": "Calculate Anything",
+  "Description": "Raycast-style natural-language calculator: math, percentages, functions, constants.",
+  "Author": "jefe",
+  "Version": "0.1.0",
+  "Language": "python",
+  "Website": "https://github.com/jefedi/flow.launcher",
+  "ExecuteFileName": "main.py",
+  "IcoPath": "Images\\icon.png"
+}
