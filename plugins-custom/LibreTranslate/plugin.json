@@ -1,0 +1,12 @@
+{
+  "ID": "A917643433A848828BF205D80157324D",
+  "ActionKeyword": "tr",
+  "Name": "LibreTranslate",
+  "Description": "Translate text on the fly using a self-hosted LibreTranslate instance.",
+  "Author": "jefe",
+  "Version": "0.1.0",
+  "Language": "python",
+  "Website": "https://github.com/jefedi/flow.launcher",
+  "ExecuteFileName": "main.py",
+  "IcoPath": "Images\\icon.png"
+}

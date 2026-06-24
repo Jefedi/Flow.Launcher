@@ -1,0 +1,34 @@
+body:
+  - type: textBlock
+    attributes:
+      description: |
+        LibreTranslate plugin settings. Point this at your self-hosted instance,
+        pick the target language, and (optionally) add an API key.
+
+  - type: input
+    attributes:
+      name: instance_url
+      label: Instance URL
+      description: Base URL of your LibreTranslate instance (no trailing slash needed).
+      defaultValue: https://translate.jefe.al
+
+  - type: dropdown
+    attributes:
+      name: target_lang
+      label: Target language
+      description: Language code to translate into.
+      defaultValue: fr
+      options:
+        - fr
+        - en
+        - es
+        - de
+        - it
+        - pt
+
+  - type: passwordBox
+    attributes:
+      name: api_key
+      label: API key (optional)
+      description: Leave empty if your instance does not require an API key.
+      defaultValue: ""
