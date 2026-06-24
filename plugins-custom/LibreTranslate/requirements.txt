@@ -1,0 +1,5 @@
+# Flow Launcher Python JSON-RPC helper library.
+flowlauncher>=0.1.0
+
+# NOTE: HTTP calls use the Python standard library (urllib), so no requests/httpx
+# dependency is required. This keeps a manually-deployed plugin dependency-light.
