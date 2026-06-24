@@ -2,23 +2,23 @@ body:
   - type: textBlock
     attributes:
       description: |
-        LibreTranslate plugin settings. Point this at your self-hosted instance,
-        pick the target language, and (optionally) add an API key.
+        Réglages du plugin LibreTranslate. Indique l'URL de ton instance,
+        choisis la langue cible, et (optionnel) ajoute une clé API.
 
   - type: input
     attributes:
       name: instance_url
-      label: Instance URL
-      description: Base URL of your LibreTranslate instance (no trailing slash needed).
+      label: URL de l'instance
+      description: "URL de base de ton instance LibreTranslate (le slash final est ignoré)."
       defaultValue: https://translate.jefe.ovh
 
   - type: dropdown
     attributes:
       name: target_lang
-      label: Target language
+      label: Langue cible
       description: >
-        LibreTranslate language code to translate into (the value is the code sent
-        to the API). Full list as offered by the instance.
+        Code de langue LibreTranslate vers lequel traduire (c'est ce code qui est
+        envoyé à l'API). Liste complète proposée par l'instance.
       defaultValue: fr
       options:
         - ar        # Arabic
@@ -74,6 +74,6 @@ body:
   - type: passwordBox
     attributes:
       name: api_key
-      label: API key (optional)
-      description: Leave empty if your instance does not require an API key.
+      label: Clé API (optionnel)
+      description: "Laisse vide si ton instance n'exige pas de clé API."
       defaultValue: ""

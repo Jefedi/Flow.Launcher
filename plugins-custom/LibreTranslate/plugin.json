@@ -2,7 +2,7 @@
   "ID": "A917643433A848828BF205D80157324D",
   "ActionKeyword": "tr",
   "Name": "LibreTranslate",
-  "Description": "Translate text on the fly using a self-hosted LibreTranslate instance.",
+  "Description": "Traduit du texte à la volée via une instance LibreTranslate self-hosted.",
   "Author": "jefe",
   "Version": "0.1.0",
   "Language": "python",
