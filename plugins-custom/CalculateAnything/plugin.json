@@ -2,7 +2,7 @@
   "ID": "F513A19270374E4A98F2618608E80770",
   "ActionKeyword": "=",
   "Name": "Calculate Anything",
-  "Description": "Raycast-style natural-language calculator: math, percentages, functions, constants.",
+  "Description": "Calculatrice en langage naturel façon Raycast : maths, devises, crypto, dates et fuseaux horaires.",
   "Author": "jefe",
   "Version": "0.1.0",
   "Language": "python",

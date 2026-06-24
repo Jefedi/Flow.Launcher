@@ -2,14 +2,14 @@ body:
   - type: textBlock
     attributes:
       description: |
-        Calculate Anything — natural-language calculator.
-        Type the action keyword followed by an expression, e.g.  = 15% of 80
+        Calculate Anything — calculatrice en langage naturel.
+        Tape le mot-clé suivi d'une expression, ex :  = 15% of 80
 
   - type: dropdown
     attributes:
       name: angle_unit
-      label: Angle unit
-      description: Unit used by trig functions (sin, cos, tan, ...).
+      label: Unité d'angle
+      description: Unité utilisée par les fonctions trigonométriques (sin, cos, tan…).
       defaultValue: radians
       options:
         - radians
@@ -18,13 +18,13 @@ body:
   - type: checkbox
     attributes:
       name: thousands_separator
-      label: Thousands separator
-      description: Group large results with separators (e.g. 1,234,567).
+      label: Séparateur de milliers
+      description: Grouper les grands résultats (ex : 1,234,567).
       defaultValue: "false"
 
   - type: input
     attributes:
       name: default_currency
-      label: Default currency
-      description: Target currency when a conversion omits one (e.g. "100 usd").
+      label: Devise par défaut
+      description: Devise cible quand la conversion n'en précise pas (ex : « 100 usd »).
       defaultValue: EUR
