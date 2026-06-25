@@ -103,22 +103,28 @@ class Calendar(FlowLauncher):
             bits = [when]
             if ev.location and not ev.location.startswith("http"):
                 bits.append(ev.location)
-            if ev.meeting_link:
-                bits.append("🎥 visio")
-            bits.append("Entrée : rejoindre la visio" if ev.meeting_link else "Entrée : copier")
 
             details = f"{ev.summary} — {when}" + (f" — {ev.location}" if ev.location else "")
-            primary = {
-                "method": "open_url" if ev.meeting_link else "Flow.Launcher.CopyToClipboard",
-                "parameters": [ev.meeting_link] if ev.meeting_link else [details, False, True],
-            }
+            if ev.meeting_link:
+                bits.append("🎥 visio")
+                bits.append("Entrée : rejoindre la visio")
+                primary = {"method": "open_url", "parameters": [ev.meeting_link]}
+            elif ev.link:
+                bits.append("Entrée : ouvrir le lien")
+                primary = {"method": "open_url", "parameters": [ev.link]}
+            else:
+                bits.append("Entrée : copier")
+                primary = {"method": "Flow.Launcher.CopyToClipboard",
+                           "parameters": [details, False, True]}
+
             results.append({
                 "Title": ev.summary,
                 "SubTitle": "  ·  ".join(bits),
                 "IcoPath": ICON,
                 "Score": 10000 - rank,  # keep chronological order
                 "JsonRPCAction": primary,
-                "ContextData": [ev.meeting_link or "", details, ev.location or ""],
+                "ContextData": [ev.meeting_link or ev.link or "", details,
+                                ev.location or "", bool(ev.meeting_link)],
             })
         return results
 
@@ -126,10 +132,11 @@ class Calendar(FlowLauncher):
         link = data[0] if len(data) > 0 else ""
         details = data[1] if len(data) > 1 else ""
         location = data[2] if len(data) > 2 else ""
+        is_meeting = bool(data[3]) if len(data) > 3 else False
         entries = []
         if link:
             entries.append({
-                "Title": "Rejoindre la visio",
+                "Title": "Rejoindre la visio" if is_meeting else "Ouvrir le lien",
                 "SubTitle": link,
                 "IcoPath": ICON,
                 "JsonRPCAction": {"method": "open_url", "parameters": [link]},

@@ -25,7 +25,7 @@ CACHE_TTL = 300  # 5 minutes
 
 Event = namedtuple(
     "Event", ["start", "end", "all_day", "summary", "location", "description",
-              "url", "meeting_link"],
+              "url", "meeting_link", "link"],
 )
 
 
@@ -82,8 +82,19 @@ def _save_cache(cache):
         pass
 
 
+def _normalize_url(url):
+    """webcal(s):// is just an ICS subscription over http(s); urllib needs http(s)."""
+    u = (url or "").strip()
+    if u.lower().startswith("webcal://"):
+        return "https://" + u[len("webcal://"):]
+    if u.lower().startswith("webcals://"):
+        return "https://" + u[len("webcals://"):]
+    return u
+
+
 def _fetch_ics(url):
     """Return the ICS text for ``url``, using a short-lived disk cache."""
+    url = _normalize_url(url)
     cache = _load_cache()
     entry = cache.get(url)
     if entry and (time.time() - entry.get("ts", 0)) < CACHE_TTL:
@@ -110,15 +121,16 @@ def _fetch_ics(url):
 
 # --- parsing ----------------------------------------------------------------
 
-def _meeting_link(*fields):
+def _extract_links(*fields):
+    """Return (meeting_link, any_link). meeting_link is set only for a recognised
+    video-call host; any_link is the first URL of any kind (fallback)."""
     urls = []
     for field in fields:
         if field:
             urls.extend(_URL_RE.findall(str(field)))
-    for url in urls:
-        if any(host in url for host in _MEETING_HOSTS):
-            return url.rstrip(".,);")
-    return urls[0].rstrip(".,);") if urls else ""
+    urls = [u.rstrip(".,);") for u in urls]
+    meeting = next((u for u in urls if any(h in u for h in _MEETING_HOSTS)), "")
+    return meeting, (urls[0] if urls else "")
 
 
 def _to_event(component):
@@ -135,7 +147,7 @@ def _to_event(component):
     location = str(component.get("LOCATION") or "")
     description = str(component.get("DESCRIPTION") or "")
     url = str(component.get("URL") or "")
-    link = _meeting_link(location, url, description, summary)
+    meeting_link, any_link = _extract_links(location, url, description, summary)
 
     return Event(
         start=as_aware(start_val),
@@ -145,7 +157,8 @@ def _to_event(component):
         location=location,
         description=description,
         url=url,
-        meeting_link=link,
+        meeting_link=meeting_link,
+        link=any_link,
     )
 
 
