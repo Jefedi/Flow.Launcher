@@ -1,0 +1,7 @@
+# Local install artifacts — must NOT be committed.
+lib/
+__pycache__/
+*.pyc
+
+# Third-party binary (Everything CLI) — download separately, see README.
+tools/*.exe

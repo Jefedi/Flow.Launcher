@@ -1,0 +1,21 @@
+body:
+  - type: textBlock
+    attributes:
+      description: |
+        File Search — recherche instantanée via Everything (voidtools).
+        Nécessite Everything installé et lancé. Le plugin utilise es.exe (fourni
+        dans tools/, ou indique son chemin ci-dessous).
+
+  - type: input
+    attributes:
+      name: es_path
+      label: Chemin de es.exe
+      description: "Laisse vide pour auto-détecter (tools/es.exe, PATH, dossier Everything)."
+      defaultValue: ""
+
+  - type: input
+    attributes:
+      name: max_results
+      label: Nombre de résultats
+      description: "Nombre maximum de résultats affichés (défaut 30)."
+      defaultValue: "30"

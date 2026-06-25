@@ -1,0 +1,5 @@
+# Flow Launcher Python JSON-RPC helper library.
+flowlauncher>=0.1.0
+
+# NOTE: search is powered by Everything's CLI (tools/es.exe), called via
+# subprocess. No third-party Python dependency beyond the RPC lib.
