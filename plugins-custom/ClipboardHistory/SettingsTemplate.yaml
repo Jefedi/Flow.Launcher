@@ -1,0 +1,8 @@
+body:
+  - type: textBlock
+    attributes:
+      description: |
+        Clipboard History — parcourt l'historique du presse-papiers de Windows.
+        « clip » liste les entrées récentes · « clip <texte> » filtre.
+        Entrée remet l'entrée dans le presse-papiers · Maj+Entrée pour supprimer/vider.
+        Requiert l'historique Windows activé : Paramètres → Système → Presse-papiers (ou Win+V).

@@ -1,0 +1,12 @@
+{
+  "ID": "0EB9A05641E94822B93AE68AC238A339",
+  "ActionKeyword": "clip",
+  "Name": "Clipboard History",
+  "Description": "Historique du presse-papiers Windows façon Raycast : parcours, recherche, recopie.",
+  "Author": "jefe",
+  "Version": "0.1.0",
+  "Language": "python",
+  "Website": "https://github.com/jefedi/flow.launcher",
+  "ExecuteFileName": "main.py",
+  "IcoPath": "Images\\icon.png"
+}

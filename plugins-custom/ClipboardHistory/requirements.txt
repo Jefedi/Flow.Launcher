@@ -1,0 +1,5 @@
+# Flow Launcher Python JSON-RPC helper library.
+flowlauncher>=0.1.0
+
+# Windows Runtime (WinRT) bindings — used to read the OS clipboard history.
+winsdk>=1.0.0b10
