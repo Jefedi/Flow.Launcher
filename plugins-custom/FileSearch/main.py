@@ -118,9 +118,12 @@ class FileSearch(FlowLauncher):
             self.reveal(path)
 
     def reveal(self, path):
-        # Open the containing folder with the item selected.
+        # Open the containing folder with the item selected. explorer.exe needs the
+        # exact form  /select,"<path>"  (quotes around the path only); building it as
+        # an argv list makes Python quote the whole token and explorer then ignores
+        # /select and opens the default folder. So pass one literal command string.
         try:
-            subprocess.Popen(["explorer", f"/select,{path}"], creationflags=_NO_WINDOW)
+            subprocess.Popen(f'explorer /select,"{path}"')
         except OSError:
             pass
 
