@@ -4,8 +4,9 @@ Recherche de fichiers **instantanée** sur tout ton système, à la
 [Everything](https://www.voidtools.com/). Le plugin interroge l'index Everything via son
 outil officiel `es.exe` — donc la même vitesse (millisecondes) sur des millions de fichiers.
 
-- ActionKeyword : `f` (modifiable dans les réglages)
-- `f <terme>` → fichiers/dossiers correspondants, instantanément
+- **Global, sans mot-clé** (ActionKeyword `*`) : tape directement ton terme dans Flow,
+  les fichiers correspondants apparaissent (façon Everything). Configurable dans les réglages.
+- `<terme>` → fichiers/dossiers correspondants, instantanément (à partir de 3 caractères)
 - **Entrée** → ouvre le fichier (app par défaut) ou le dossier
 - **Maj+Entrée** (menu) → Ouvrir · Ouvrir le dossier contenant · Ouvrir avec… · Ouvrir un
   terminal ici · Exécuter en administrateur (exécutables) · Copier le chemin · Copier le

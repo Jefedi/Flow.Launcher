@@ -25,6 +25,7 @@ _NO_WINDOW = 0x08000000
 DEFAULTS = {
     "es_path": "",
     "max_results": "30",
+    "min_chars": "3",  # global (no-keyword) mode: don't search below this length
 }
 
 
@@ -40,25 +41,32 @@ class FileSearch(FlowLauncher):
 
     def query(self, query):
         text = (query or "").strip()
-        if not text:
-            return self._single(
-                "Tape un nom de fichier ou de dossier",
-                "Syntaxe Everything : *.pdf · rapport · ext:docx · C:\\Users\\ facture",
-            )
 
         settings = self._settings()
         try:
             limit = int(settings.get("max_results") or 30)
         except (TypeError, ValueError):
             limit = 30
+        try:
+            min_chars = max(1, int(settings.get("min_chars") or 3))
+        except (TypeError, ValueError):
+            min_chars = 3
+
+        # Global (no-keyword) plugin: stay quiet on short input so we don't run
+        # Everything on every keystroke nor clutter unrelated searches.
+        if len(text) < min_chars:
+            return []
 
         try:
             results = es_search.search(text, settings.get("es_path", ""), limit)
         except es_search.EverythingError as exc:
-            return self._single("Recherche indisponible", str(exc))
+            # Surface the error (only happens when misconfigured / Everything off),
+            # so it never clutters normal searches but explains a broken setup.
+            return self._single("Recherche de fichiers indisponible", str(exc))
 
+        # No matches -> contribute nothing (other plugins/results stay clean).
         if not results:
-            return self._single("Aucun résultat", f"Rien ne correspond à « {text} »")
+            return []
 
         out = []
         for rank, r in enumerate(results):

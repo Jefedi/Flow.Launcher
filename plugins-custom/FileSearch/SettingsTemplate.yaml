@@ -19,3 +19,10 @@ body:
       label: Nombre de résultats
       description: "Nombre maximum de résultats affichés (défaut 30)."
       defaultValue: "30"
+
+  - type: input
+    attributes:
+      name: min_chars
+      label: Caractères minimum
+      description: "Sans mot-clé (recherche globale), ne cherche qu'à partir de N caractères (défaut 3)."
+      defaultValue: "3"

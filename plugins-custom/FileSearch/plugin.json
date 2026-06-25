@@ -1,6 +1,6 @@
 {
   "ID": "B4CB61BCB1EA4280BCCD7A66C24C1986",
-  "ActionKeyword": "f",
+  "ActionKeyword": "*",
   "Name": "File Search",
   "Description": "Recherche de fichiers instantanée façon Everything (via es.exe).",
   "Author": "jefe",
