@@ -7,7 +7,9 @@ outil officiel `es.exe` — donc la même vitesse (millisecondes) sur des millio
 - ActionKeyword : `f` (modifiable dans les réglages)
 - `f <terme>` → fichiers/dossiers correspondants, instantanément
 - **Entrée** → ouvre le fichier (app par défaut) ou le dossier
-- **Maj+Entrée** (menu) → Ouvrir · Ouvrir le dossier contenant · Copier le chemin · Copier le nom
+- **Maj+Entrée** (menu) → Ouvrir · Ouvrir le dossier contenant · Ouvrir avec… · Ouvrir un
+  terminal ici · Exécuter en administrateur (exécutables) · Copier le chemin · Copier le
+  dossier parent · Copier le nom · Copier le nom sans extension
 - Syntaxe **Everything** supportée : `*.pdf`, `ext:docx`, `rapport`, `C:\Users\ facture`, etc.
 
 > Plugin isolé dans `plugins-custom/FileSearch/` — **aucune modif du core C#**.
