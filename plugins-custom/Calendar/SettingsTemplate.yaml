@@ -1,0 +1,22 @@
+body:
+  - type: textBlock
+    attributes:
+      description: |
+        Calendar — aperçu de ton agenda dans Flow.
+        Colle l'URL ICS (secrète) de ton calendrier. Google Agenda :
+        Paramètres → ton agenda → « Adresse secrète au format iCal ».
+        Outlook : Paramètres → Calendrier → Calendriers partagés → Publier → ICS.
+
+  - type: input
+    attributes:
+      name: ics_url
+      label: URL(s) ICS
+      description: "URL ICS de ton agenda. Plusieurs possibles, séparées par une virgule."
+      defaultValue: ""
+
+  - type: input
+    attributes:
+      name: lookahead_days
+      label: Horizon (jours)
+      description: "Nombre de jours à venir à afficher (défaut 7)."
+      defaultValue: "7"

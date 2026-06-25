@@ -1,0 +1,5 @@
+# Flow Launcher Python JSON-RPC helper library.
+flowlauncher>=0.1.0
+
+# ICS parsing + recurring-event expansion (pulls icalendar, python-dateutil, tzdata).
+recurring-ical-events>=2.0.0

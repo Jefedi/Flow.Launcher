@@ -1,0 +1,12 @@
+{
+  "ID": "701958F010824B90B3EDB341C20DDC7E",
+  "ActionKeyword": "cal",
+  "Name": "Calendar",
+  "Description": "Aperçu de ton agenda façon Raycast : prochains événements ICS, rejoins la visio d'un Entrée.",
+  "Author": "jefe",
+  "Version": "0.1.0",
+  "Language": "python",
+  "Website": "https://github.com/jefedi/flow.launcher",
+  "ExecuteFileName": "main.py",
+  "IcoPath": "Images\\icon.png"
+}
